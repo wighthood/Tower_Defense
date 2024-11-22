@@ -1,10 +1,10 @@
 using PoolSystem;
 using UnityEngine;
 
-public class Spawner : MonoBehaviour
+public class EnemySpawner : MonoBehaviour
 {
     [SerializeField, Min(0.0f)] private float _spawnRate;
-    [SerializeField] private Transform _StartPoint;
+    private Transform _StartPoint;
     [SerializeField] private Transform[] Nodes;
     [SerializeField] private Transform _EndPoint;
     [SerializeField] private GameObject _Enemy;
@@ -15,6 +15,7 @@ public class Spawner : MonoBehaviour
     private float _timer;
     void Start()
     {
+        _StartPoint = transform;
         _EnemyPool = new ComponentPool<EnemyScript>(_Enemy, _maxSpawn, _minSpawn);
         _timer = 0.0f;
     }
