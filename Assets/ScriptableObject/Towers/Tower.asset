@@ -15,3 +15,4 @@ MonoBehaviour:
   _spawnRate: 0.5
   _range: 3
   _AOE: 0
+  _Tower: {fileID: 11400000}

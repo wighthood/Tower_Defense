@@ -5,5 +5,5 @@ public class Tower : ScriptableObject
 {
     [Min(0.0f)] public float _spawnRate;
     [Min(0.0f)] public float _range;
-    public bool _AOE;
+    public GameObject _Tower;
 }

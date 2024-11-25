@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using PoolSystem;
@@ -26,7 +25,6 @@ public class TowerScript : MonoBehaviour
         _StartPoint = transform;
         _SpawnTimer = tower._spawnRate;
         _Range = tower._range;
-        _AOE = tower._AOE;
         _ProjectilePool = new ComponentPool<ProjectileScript>(projectile, _maxSpawn, _minSpawn);
     }
 

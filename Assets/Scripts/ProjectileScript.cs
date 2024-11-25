@@ -1,4 +1,3 @@
-using System;
 using PoolSystem;
 using UnityEngine;
 
@@ -20,7 +19,6 @@ public class ProjectileScript : MonoBehaviour, IPoolableObject<ProjectileScript>
 
     private void DealDamage()
     {
-        Debug.Log(_damage);
         target.GetComponent<EnemyScript>()._PV -= _damage;
         Pool.Release(this);
     }
