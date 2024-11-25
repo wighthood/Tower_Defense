@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [SerializeField, Min(0.0f)] private float _spawnRate;
     private Transform _StartPoint;
+    [SerializeField, Min(0.0f)] private float _spawnRate;
     [SerializeField] private Transform[] Nodes;
     [SerializeField] private Transform _EndPoint;
     [SerializeField] private GameObject _Enemy;
