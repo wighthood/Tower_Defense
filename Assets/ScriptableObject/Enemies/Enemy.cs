@@ -6,4 +6,5 @@ public class Enemy : ScriptableObject
     public int _PV;
     public float _Speed;
     public int _Attack;
+    public int _Prime;
 }

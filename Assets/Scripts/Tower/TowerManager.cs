@@ -6,6 +6,8 @@ using UnityEngine.InputSystem;
 
 public class TowerManager : MonoBehaviour
 {
+    [SerializeField] private tileManager tileManager;
+    [SerializeField] private GameManager gameManager;
     private Vector2 _currentMousePosition = Vector2.zero;
     private Vector2 _lastMousePosition = Vector2.zero;
     private GameObject _CurrentPreviewTower;
@@ -26,11 +28,13 @@ public class TowerManager : MonoBehaviour
             return;
         }
 
-        if (_CurrentPreviewTower == null)
+        if (_CurrentPreviewTower == null )
         {
-            _CurrentPreviewTower = TileManager._Instance.Place(_tower._Tower,TileManager._Instance.RoundToCell(_currentMousePosition));
+           
+            _CurrentPreviewTower = tileManager.Place(_tower._Tower,tileManager.RoundToCell(_currentMousePosition));
             _CurrentPreviewTower.GetComponent<TowerScript>().enabled = false;
             if (_CurrentPreviewTower == null)return;
+            _CurrentPreviewTower.GetComponentInChildren<Collider2D>().enabled = false;
         }
         UpdatePreview();
     }
@@ -54,16 +58,17 @@ public class TowerManager : MonoBehaviour
 
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(_currentMousePosition);
 
-            if (!TileManager._Instance.CanPlace(mousePos))
+            if (!tileManager.CanPlace(mousePos))
             {
                 ResetPreview();
                 return;
             }
             
-            if (_tower._Tower != null)
+            if (_tower._Tower != null &&  gameManager._Money >= _CurrentPreviewTower.GetComponent<TowerScript>()._price)
             {
                 //_characterData._Inventory.TryRemoveItems(itemStructure, 1);
-                GameObject structure = TileManager._Instance.Place(_tower._Tower,mousePos);
+                gameManager._Money -= _CurrentPreviewTower.GetComponent<TowerScript>()._price;
+                GameObject structure = tileManager.Place(_tower._Tower,mousePos);
                 if (structure == null)
                 {
                     ResetPreview();
@@ -89,7 +94,7 @@ public class TowerManager : MonoBehaviour
 
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(_currentMousePosition);
 
-            RaycastHit2D hit = Physics2D.Raycast(mousePos + Vector3.back * 10,
+            RaycastHit2D hit = Physics2D.Raycast(mousePos + Vector3.back * 10 ,
                 Camera.main.transform.forward, 11f);
             if (hit.collider == null)
             {
@@ -103,6 +108,7 @@ public class TowerManager : MonoBehaviour
                 ResetPreview();
                 return;
             }
+            gameManager._Money += tower._price/2;
             Destroy(tower.gameObject);
             ResetPreview();
         }
@@ -110,7 +116,7 @@ public class TowerManager : MonoBehaviour
 
     private void ResetPreview()
     {
-        _tower = null;
+        _PlacedTower = null;
         if (_CurrentPreviewTower!= null)
         {
             Destroy(_CurrentPreviewTower);
@@ -125,11 +131,10 @@ public class TowerManager : MonoBehaviour
             ResetPreview();
             return;
         }
-        Vector2 currentMousePositionRounded = TileManager._Instance.RoundToCell(Camera.main.ScreenToWorldPoint(_currentMousePosition));
-        
+        Vector2 currentMousePositionRounded = tileManager.RoundToCell(Camera.main.ScreenToWorldPoint(_currentMousePosition));
         if (_lastMousePosition != currentMousePositionRounded)
         {
-            _lastMousePosition = currentMousePositionRounded;
+            _lastMousePosition = currentMousePositionRounded + Vector2.one/4;
         }
         _CurrentPreviewTower.transform.position = _lastMousePosition;
     }

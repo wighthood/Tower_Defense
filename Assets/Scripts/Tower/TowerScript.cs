@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using System.Linq;
 using PoolSystem;
 using UnityEngine;
 
@@ -9,6 +7,7 @@ public class TowerScript : MonoBehaviour
     [SerializeField] private GameObject projectile;
     [SerializeField] private int _maxSpawn;
     [SerializeField] private int _minSpawn;
+    [SerializeField] GameObject _RangeCollider;
     
     private Transform _StartPoint;
     private Transform _EndPoint;
@@ -17,6 +16,7 @@ public class TowerScript : MonoBehaviour
     private float _Range;
     private float _timer;
     private bool _AOE;
+    public int _price { get;private  set; }
     private GameObject _Target;
 
     private void Awake()
@@ -26,41 +26,26 @@ public class TowerScript : MonoBehaviour
         _SpawnTimer = tower._spawnRate;
         _Range = tower._range;
         _ProjectilePool = new ComponentPool<ProjectileScript>(projectile, _maxSpawn, _minSpawn);
+        _price = tower._price;
+        _RangeCollider.GetComponent<CircleCollider2D>().radius = tower._range;
     }
-
-    private GameObject AcquireTarget()
-    {
-        List<Collider2D>targets = Physics2D.OverlapCircleAll(_StartPoint.position, _Range)
-            .Where(x => x.GetComponent<EnemyScript>() != null).ToList();
-        float max = 0;
-        GameObject CurrentTarget = null;
-        foreach (var target in targets)
-        {
-            float distance = target.GetComponent<EnemyScript>()._Distance;
-            if (distance > max)
-            {
-                max =distance;
-                CurrentTarget = target.gameObject;
-            }
-        }
-        return CurrentTarget;
-    }
-
     private void Update()
     {
-        _Target = AcquireTarget();
-        if (_Target == null) return;
+        if (_timer >= _SpawnTimer  ) return;
         _timer += Time.deltaTime;
-        if (!(_timer >= _SpawnTimer) ) return;
+        if ((_timer <= _SpawnTimer) ) return;
         _timer = 0.0f;
         CreateNewProjectile();
     }
-
+    
     private ProjectileScript CreateNewProjectile()
     {
-        ProjectileScript projectile = _ProjectilePool.Get();
+        _Target = _RangeCollider.GetComponent<FindTarget>().GetTarget();
+        if (_Target == null) return null;
+        ProjectileScript projectile = _ProjectilePool.Get(); 
         projectile.transform.position = _StartPoint.position;
         projectile.target = _Target;
+        
 
         return projectile;
     }

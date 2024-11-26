@@ -137,6 +137,8 @@ MonoBehaviour:
   _Nodes:
   - {fileID: 0}
   - {fileID: 0}
+  _PV: 0
+  _GameManager: {fileID: 0}
 --- !u!61 &2222694599685898681
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1539278e57886134bafa5033740b62ad, type: 3}
   m_Name: Tower
   m_EditorClassIdentifier: 
+  towerPrefab: {fileID: 2158587185780753936, guid: 68cf612fc6f1a3c4499d92895bf3c43a, type: 3}
   _spawnRate: 0.5
   _range: 3
-  _AOE: 0
-  _Tower: {fileID: 11400000}
+  _price: 10

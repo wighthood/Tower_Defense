@@ -294,7 +294,7 @@ Canvas:
   m_GameObject: {fileID: 260845105}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 1
+  m_RenderMode: 0
   m_Camera: {fileID: 519420031}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -714,6 +714,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e93c1be7d5e0544bb56578acda9042b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileManager: {fileID: 1360462358}
+  gameManager: {fileID: 1751429813}
   _PlacedTower: {fileID: 0}
 --- !u!4 &958305983
 Transform:
@@ -852,6 +854,57 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!1 &992549553 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 994182810613420240, guid: 68cf612fc6f1a3c4499d92895bf3c43a, type: 3}
+  m_PrefabInstance: {fileID: 1217807949}
+  m_PrefabAsset: {fileID: 0}
+--- !u!61 &992549556
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 992549553}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!1001 &1217807949
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -904,10 +957,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 7273997310537364356, guid: 68cf612fc6f1a3c4499d92895bf3c43a, type: 3}
+      propertyPath: m_ExcludeLayers.m_Bits
+      value: 8
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: -1900592919520405481, guid: 68cf612fc6f1a3c4499d92895bf3c43a, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 994182810613420240, guid: 68cf612fc6f1a3c4499d92895bf3c43a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 992549556}
   m_SourcePrefab: {fileID: 100100000, guid: 68cf612fc6f1a3c4499d92895bf3c43a, type: 3}
 --- !u!4 &1217807950 stripped
 Transform:
@@ -1424,6 +1485,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8259685906746943735, guid: b062321dc0b9d8044bd74603f4d330f9, type: 3}
   m_PrefabInstance: {fileID: 3154367241142487281}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1751429813 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7540099216649488134, guid: b062321dc0b9d8044bd74603f4d330f9, type: 3}
+  m_PrefabInstance: {fileID: 3154367241142487281}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86f2adc1d08ab7649b1f35c0f2a577fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1795621970
 GameObject:
   m_ObjectHideFlags: 0
@@ -1670,6 +1742,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 710624875}
     m_Modifications:
+    - target: {fileID: 7540099216649488134, guid: b062321dc0b9d8044bd74603f4d330f9, type: 3}
+      propertyPath: _Money
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 8259685906746943735, guid: b062321dc0b9d8044bd74603f4d330f9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 9.5

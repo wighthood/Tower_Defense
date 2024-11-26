@@ -10,7 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4296538979010222093}
   - component: {fileID: 1907387629116033662}
-  m_Layer: 0
+  - component: {fileID: 4251820891533897752}
+  - component: {fileID: 4672728919206339879}
+  m_Layer: 3
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -87,6 +89,54 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!58 &4251820891533897752
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 994182810613420240}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_Radius: 1
+--- !u!114 &4672728919206339879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 994182810613420240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0150ca854e36d64f8ac7c9c8420f300, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2158587185780753936
 GameObject:
   m_ObjectHideFlags: 0
@@ -97,7 +147,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5835530065508518588}
   - component: {fileID: 6753033977319950251}
-  - component: {fileID: -1900592919520405481}
+  - component: {fileID: 1266270614083536240}
   m_Layer: 0
   m_Name: Tower
   m_TagString: Untagged
@@ -137,7 +187,8 @@ MonoBehaviour:
   projectile: {fileID: 6838615377099667522, guid: c19715f86283e644fb351bb2ba318898, type: 3}
   _maxSpawn: 1
   _minSpawn: 1
---- !u!61 &-1900592919520405481
+  _RangeCollider: {fileID: 994182810613420240}
+--- !u!61 &1266270614083536240
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -181,5 +232,5 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.5, y: 0.5}
   m_EdgeRadius: 0

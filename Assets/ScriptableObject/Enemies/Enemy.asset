@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Enemy
   m_EditorClassIdentifier: 
   _PV: 10
-  _Attack: 1
   _Speed: 3
+  _Attack: 1
+  _Prime: 3

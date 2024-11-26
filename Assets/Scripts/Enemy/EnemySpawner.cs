@@ -10,6 +10,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private GameObject _Enemy;
     [SerializeField] private int _maxSpawn;
     [SerializeField] private int _minSpawn;
+    [SerializeField] private GameManager _GameManager;
     
     private ComponentPool<EnemyScript> _EnemyPool;
     private float _timer;
@@ -23,12 +24,13 @@ public class EnemySpawner : MonoBehaviour
     public EnemyScript CreateNewEnemy()
     {
         EnemyScript enemy = _EnemyPool.Get();
-        enemy.GetComponent<EnemyScript>()._Nodes.Clear();
+        enemy._Nodes.Clear();
         foreach(var node in Nodes)
         {
-            enemy.GetComponent<EnemyScript>()._Nodes.Add(node);
+            enemy._Nodes.Add(node);
         }
-        enemy.GetComponent<EnemyScript>()._Nodes.Add(_EndPoint);
+        enemy._Nodes.Add(_EndPoint);
+        enemy._GameManager = _GameManager;
         enemy.transform.position = _StartPoint.position;
         return enemy;
     }
