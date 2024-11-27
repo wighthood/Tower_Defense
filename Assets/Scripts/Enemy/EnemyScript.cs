@@ -1,21 +1,22 @@
 using System.Collections.Generic;
 using PoolSystem;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class EnemyScript : MonoBehaviour, IPoolableObject<EnemyScript>
 {
-    [SerializeField] private Enemy _Enemy;
     public List<Transform> _Nodes = new List<Transform>();
     private Transform _Transform;
     public int _PV;
-    public  int _Prime { get; private set; }
+    public int _Prime;
     public float _Distance { get;private set; }
-    private float _Speed;
-    private int _Attack;
+    public float _Speed;
+    public int _Attack;
     private int i;
     private Pool<EnemyScript> _Pool;
     public GameManager _GameManager;
-    
+
+    public UnityEvent<EnemyScript> ondeath;
     public Pool<EnemyScript> Pool
     {
         get => _Pool; set => _Pool = value;
@@ -26,10 +27,6 @@ public class EnemyScript : MonoBehaviour, IPoolableObject<EnemyScript>
         i = 0;
         _Distance = 0;
         _Transform = transform;
-        _PV = _Enemy._PV;
-        _Speed = _Enemy._Speed;
-        _Attack = _Enemy._Attack;
-        _Prime = _Enemy._Prime;
     }
 
     // Update is called once per frame
@@ -39,6 +36,7 @@ public class EnemyScript : MonoBehaviour, IPoolableObject<EnemyScript>
         {
             _GameManager._Money += _Prime;
             _GameManager.updateMoneyText();
+            ondeath.Invoke(this);
             Pool.Release(this);
         }
         if (_Nodes.Count <= 0 || i >= _Nodes.Count) return;
