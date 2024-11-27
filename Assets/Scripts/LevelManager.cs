@@ -11,33 +11,31 @@ public class LevelManager : MonoBehaviour
     
     private float Timer;
     private int currentLevel = 0;
-
-    private void Awake()
-    {
-        LoadLevel();
-    }
-
+    
     private void Update()
     {
-        if (spawner.count >= spawner._Enemies[0].Quantity && spawner._AliveEnemies.Count ==0)
+        if (spawner._Enemies.Count == 0 && spawner._AliveEnemies.Count ==0)
         {
             Timer += Time.deltaTime;
         }
 
         if (Timer >= WaveDelay)
         {
-            currentLevel++;
-            if (currentLevel <  levels.Count) LoadLevel();
+            Timer = 0;
+            if (currentLevel  <  levels.Count) LoadLevel();
             Application.Quit();
         }
-        
     }
 
     private void LoadLevel()
     {
-        Timer = 0;
+        spawner.counts.Clear();
+        foreach (var enemy in levels[currentLevel].enemies)
+        {
+            spawner.counts.Add(0);
+        }
         spawner._Enemies = levels[currentLevel].enemies;
         spawner._spawnRate = levels[currentLevel].spawnrate;
-        spawner.count = 0;
+        currentLevel++;
     }
 }

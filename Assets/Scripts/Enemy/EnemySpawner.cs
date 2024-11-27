@@ -6,9 +6,8 @@ using Random = UnityEngine.Random;
 public class EnemySpawner : MonoBehaviour
 {
     public List<EnemyWithQuantity> _Enemies;
-    public  int count;
+    public  List<int> counts = new ();
     public List<EnemyScript> _AliveEnemies { private set; get; } = new();
-    
     [ Min(0.0f)] public float _spawnRate;
     [SerializeField] private Transform[] Nodes;
     [SerializeField] private Transform _EndPoint;
@@ -20,6 +19,7 @@ public class EnemySpawner : MonoBehaviour
     private ComponentPool<EnemyScript> _EnemyPool;
     private float _timer;
     private Transform _StartPoint;
+    private int EnemyToSpawn;
     void OnEnable()
     {
         _StartPoint = transform;
@@ -35,8 +35,17 @@ public class EnemySpawner : MonoBehaviour
     
     public EnemyScript CreateNewEnemy()
     {
-        count++;
-        int EnemyToSpawn = Random.Range(0, _Enemies.Count);
+        EnemyToSpawn = Random.Range(0, counts.Count);
+        if (counts[EnemyToSpawn] >= _Enemies[EnemyToSpawn].Quantity)
+        {
+            counts.RemoveAt(EnemyToSpawn);
+            if (counts.Count <= 0) return null;
+            CreateNewEnemy();
+        }
+        else
+        {
+            counts[EnemyToSpawn]++;
+        }
         EnemyScript enemy = _EnemyPool.Get();
         enemy.ondeath.AddListener(RemoveEnnemy);
         enemy._Nodes.Clear();
@@ -59,20 +68,14 @@ public class EnemySpawner : MonoBehaviour
     {
         _AliveEnemies.Remove(enemy);
     }
-
     
     private void Update()
     {
         _timer += Time.deltaTime;
-        if (_timer >= _spawnRate && count <  _Enemies[0].Quantity)
+        if (_timer >= _spawnRate  && counts.Count > 0)
         {
-            _timer = 0.0f;
+              _timer = 0.0f;
             CreateNewEnemy();
         }
     }
-}
-
-public enum  EnemyType
-{
-    normal
 }
