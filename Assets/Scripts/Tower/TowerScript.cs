@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using PoolSystem;
 using UnityEngine;
 
@@ -7,7 +9,6 @@ public class TowerScript : MonoBehaviour
     [SerializeField] private GameObject projectile;
     [SerializeField] private int _maxSpawn;
     [SerializeField] private int _minSpawn;
-    [SerializeField] GameObject _RangeCollider;
     
     private Transform _StartPoint;
     private Transform _EndPoint;
@@ -27,26 +28,36 @@ public class TowerScript : MonoBehaviour
         _Range = tower._range;
         _ProjectilePool = new ComponentPool<ProjectileScript>(projectile, _maxSpawn, _minSpawn);
         _price = tower._price;
-        _RangeCollider.GetComponent<CircleCollider2D>().radius = tower._range;
     }
+
     private void Update()
     {
-        if (_timer >= _SpawnTimer  ) return;
         _timer += Time.deltaTime;
         if ((_timer <= _SpawnTimer) ) return;
         _timer = 0.0f;
-        CreateNewProjectile();
+        FindTarget();
+        if (_Target != null) 
+            CreateNewProjectile();
     }
-    
+
+    private void FindTarget()
+    {
+        float x = 0;
+        List<Collider2D> Targets = Physics2D.OverlapCircleAll(_StartPoint.position, _Range).Where(x =>x.GetComponent<EnemyScript>() is not null).ToList();
+        foreach (var target in Targets)
+        {
+            if (target.GetComponent<EnemyScript>()._Distance > x)
+            {
+                x = target.GetComponent<EnemyScript>()._Distance;
+                _Target = target.gameObject;
+            }
+        }
+    }
     private ProjectileScript CreateNewProjectile()
     {
-        _Target = _RangeCollider.GetComponent<FindTarget>().GetTarget();
-        if (_Target == null) return null;
-        ProjectileScript projectile = _ProjectilePool.Get(); 
-        projectile.transform.position = _StartPoint.position;
-        projectile.target = _Target;
-        
-
-        return projectile;
+        ProjectileScript newProjectile = _ProjectilePool.Get(); 
+        newProjectile.transform.position = _StartPoint.position;
+        newProjectile.target = _Target;
+        return newProjectile;
     }
 }

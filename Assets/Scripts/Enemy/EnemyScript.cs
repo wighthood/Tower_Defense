@@ -1,8 +1,6 @@
-using System;
 using System.Collections.Generic;
 using PoolSystem;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class EnemyScript : MonoBehaviour, IPoolableObject<EnemyScript>
 {

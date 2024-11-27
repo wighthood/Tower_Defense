@@ -1852,6 +1852,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1751429812}
     - target: {fileID: 4964164017972265265, guid: 44a075ac1b36bb745a9160db8f637741, type: 3}
+      propertyPath: _GameManager
+      value: 
+      objectReference: {fileID: 1751429813}
+    - target: {fileID: 4964164017972265265, guid: 44a075ac1b36bb745a9160db8f637741, type: 3}
       propertyPath: 'Nodes.Array.data[0]'
       value: 
       objectReference: {fileID: 1475073519}
