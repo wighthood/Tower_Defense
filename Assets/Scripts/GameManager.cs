@@ -1,13 +1,29 @@
+using System;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
     public float _Lives;
     public int _Money;
-  
-    private void Update()
+    [SerializeField] private TextMeshProUGUI _LivesText;
+    [SerializeField] private TextMeshProUGUI _MoneyText;
+
+    private void Awake()
     {
-        if (_Lives > 0) return;
-        Application.Quit();
+        updateLivesText();
+        updateMoneyText();
+    }
+
+    public void updateLivesText()
+    {
+        _LivesText.SetText("Lives : " + _Lives);
+        if (_Lives <= 0) Application.Quit();
+    }
+
+    public void updateMoneyText()
+    {
+        _MoneyText.SetText("Money : " + _Money);
     }
 }

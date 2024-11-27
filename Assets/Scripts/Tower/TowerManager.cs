@@ -68,6 +68,7 @@ public class TowerManager : MonoBehaviour
             {
                 //_characterData._Inventory.TryRemoveItems(itemStructure, 1);
                 gameManager._Money -= _CurrentPreviewTower.GetComponent<TowerScript>()._price;
+                gameManager.updateMoneyText();
                 GameObject structure = tileManager.Place(_tower._Tower,mousePos);
                 if (structure == null)
                 {
@@ -109,6 +110,7 @@ public class TowerManager : MonoBehaviour
                 return;
             }
             gameManager._Money += tower._price/2;
+            gameManager.updateMoneyText();
             Destroy(tower.gameObject);
             ResetPreview();
         }

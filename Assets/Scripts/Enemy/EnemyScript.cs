@@ -38,6 +38,7 @@ public class EnemyScript : MonoBehaviour, IPoolableObject<EnemyScript>
         if (_PV <= 0)
         {
             _GameManager._Money += _Prime;
+            _GameManager.updateMoneyText();
             Pool.Release(this);
         }
         if (_Nodes.Count <= 0 || i >= _Nodes.Count) return;
@@ -51,6 +52,7 @@ public class EnemyScript : MonoBehaviour, IPoolableObject<EnemyScript>
             if (i == _Nodes.Count-1)
             {
                 _Nodes[^1].GetComponent<GameManager>()._Lives--;
+                _Nodes[^1].GetComponent<GameManager>().updateLivesText();
                 Pool.Release(this);
             }
             i++;

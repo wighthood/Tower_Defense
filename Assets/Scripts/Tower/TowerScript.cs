@@ -35,9 +35,7 @@ public class TowerScript : MonoBehaviour
         _timer += Time.deltaTime;
         if ((_timer <= _SpawnTimer) ) return;
         _timer = 0.0f;
-        FindTarget();
-        if (_Target != null) 
-            CreateNewProjectile();
+        CreateNewProjectile();
     }
 
     private void FindTarget()
@@ -46,7 +44,7 @@ public class TowerScript : MonoBehaviour
         List<Collider2D> Targets = Physics2D.OverlapCircleAll(_StartPoint.position, _Range).Where(x =>x.GetComponent<EnemyScript>() is not null).ToList();
         foreach (var target in Targets)
         {
-            if (target.GetComponent<EnemyScript>()._Distance > x)
+            if (target.GetComponent<EnemyScript>()._Distance > x && target.GetComponent<EnemyScript>()._PV >0)
             {
                 x = target.GetComponent<EnemyScript>()._Distance;
                 _Target = target.gameObject;
@@ -55,9 +53,12 @@ public class TowerScript : MonoBehaviour
     }
     private ProjectileScript CreateNewProjectile()
     {
+        FindTarget();
+        if (_Target == null) return null;
         ProjectileScript newProjectile = _ProjectilePool.Get(); 
         newProjectile.transform.position = _StartPoint.position;
         newProjectile.target = _Target;
+        _Target = null;
         return newProjectile;
     }
 }
