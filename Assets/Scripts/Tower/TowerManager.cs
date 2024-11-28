@@ -32,7 +32,8 @@ public class TowerManager : MonoBehaviour
         {
            
             _CurrentPreviewTower = tileManager.Place(_tower._Tower,tileManager.RoundToCell(_currentMousePosition));
-            _CurrentPreviewTower.GetComponent<TowerBase>().enabled = false;
+            _CurrentPreviewTower.GetComponent<StructBase>().enabled = false;
+            _CurrentPreviewTower.GetComponentInChildren<SpriteRenderer>().enabled = true;
             if (_CurrentPreviewTower == null)return;
             _CurrentPreviewTower.GetComponentInChildren<Collider2D>().enabled = false;
         }
@@ -64,10 +65,10 @@ public class TowerManager : MonoBehaviour
                 return;
             }
             
-            if (_tower._Tower != null &&  gameManager._Money >= _CurrentPreviewTower.GetComponent<TowerBase>()._price)
+            if (_tower._Tower != null &&  gameManager._Money >= _CurrentPreviewTower.GetComponent<StructBase>()._price)
             {
                 //_characterData._Inventory.TryRemoveItems(itemStructure, 1);
-                gameManager._Money -= _CurrentPreviewTower.GetComponent<TowerBase>()._price;
+                gameManager._Money -= _CurrentPreviewTower.GetComponent<StructBase>()._price;
                 gameManager.updateMoneyText();
                 GameObject structure = tileManager.Place(_tower._Tower,mousePos);
                 if (structure == null)
@@ -103,15 +104,15 @@ public class TowerManager : MonoBehaviour
                 return;
             }
 
-            TowerBase tower = hit.collider.GetComponentInParent<TowerBase>();
-            if (tower == null)
+            StructBase @struct = hit.collider.GetComponentInParent<StructBase>();
+            if (@struct == null)
             {
                 ResetPreview();
                 return;
             }
-            gameManager._Money += tower._price/2;
+            gameManager._Money += @struct._price/2;
             gameManager.updateMoneyText();
-            Destroy(tower.gameObject);
+            Destroy(@struct.gameObject);
             ResetPreview();
         }
     }
@@ -149,7 +150,7 @@ public class TowerManager : MonoBehaviour
         List<RaycastResult> results = new List<RaycastResult>();
         EventSystem.current.RaycastAll(customEventData, results);
 
-        if (results.Where(x => x.gameObject.GetComponentInParent<TowerBase>() == null).Count() > 0)
+        if (results.Where(x => x.gameObject.GetComponentInParent<StructBase>() == null).Count() > 0)
         {
             return true;
         }

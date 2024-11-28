@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class SlowTrap  : TowerBase
+public class SlowTrap  : StructBase
 {
     [SerializeField] private float multiplier = .75f;
     protected override void Process()

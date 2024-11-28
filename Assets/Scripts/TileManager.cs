@@ -55,7 +55,7 @@ public class tileManager : MonoBehaviour
         
         List<Collider2D> colliders = Physics2D.OverlapBoxAll(position,Vector3.one/4,0,3).ToList();
 
-        if (TowerPrefab.GetComponent<TowerBase>()._IsTrap)
+        if (TowerPrefab.GetComponent<StructBase>()._IsTrap)
         {
             if (_defaultTileMap.GetTile(_defaultTileMap.WorldToCell(WorldPosition)) != PathTile)
                 return false;
@@ -67,6 +67,6 @@ public class tileManager : MonoBehaviour
                 return false;
             }
         }
-        return (colliders.Where(x => x.GetComponentInParent<TowerBase>() != null && x.transform.parent.GetComponent<Tilemap>() == _defaultTileMap).Count() == 0);
+        return (colliders.Where(x => x.GetComponentInParent<StructBase>() != null && x.transform.parent.GetComponent<Tilemap>() == _defaultTileMap).Count() == 0);
     }
 }

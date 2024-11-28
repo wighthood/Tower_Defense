@@ -29,12 +29,11 @@ public class LevelManager : MonoBehaviour
 
     private void LoadLevel()
     {
-        spawner.counts.Clear();
         foreach (var enemy in levels[currentLevel].enemies)
         {
-            spawner.counts.Add(0);
+            spawner._Counts.Add(0);
         }
-        spawner._Enemies = levels[currentLevel].enemies;
+        spawner._Enemies = new List<EnemyWithQuantity>(levels[currentLevel].enemies);
         spawner._spawnRate = levels[currentLevel].spawnrate;
         currentLevel++;
     }

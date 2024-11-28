@@ -6,5 +6,4 @@ public struct EnemyWithQuantity
 {
     public Enemy Enemy;
     public int Quantity;
-    
 }
