@@ -15,7 +15,7 @@ public class NecromanticTower : StructBase
     protected override void Process()
     {
         base.Process();
-        if ((_timer <= _SpawnTimer)) return;
+        if ((_timer <= _Cooldown)) return;
         _timer = 0.0f;
     }
 }

@@ -3,7 +3,7 @@ using UnityEngine;
 public  class  StructBase : MonoBehaviour
 {
     [SerializeField] private Tower tower;
-    protected float _SpawnTimer;
+    protected float _Cooldown;
     protected float _Range;
     protected float _timer;
     protected Transform _StartPoint;
@@ -14,7 +14,7 @@ public  class  StructBase : MonoBehaviour
     protected virtual void Awake()
     {
         _timer = 0;
-        _SpawnTimer = tower._Cooldown;
+        _Cooldown = tower._Cooldown;
         _Range = tower._range;
         _price = tower._price;
         _IsTrap = tower._IsTrap;
