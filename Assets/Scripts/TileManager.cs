@@ -9,6 +9,8 @@ public class tileManager : MonoBehaviour
     [SerializeField]
     private Tilemap _defaultTileMap;
 
+    [SerializeField] private Tile PathTile;
+
     public Vector3 _TileOffset { get; private set; } = new Vector3(0.5f,0.5f,0);
     
     /// <summary>
@@ -52,6 +54,7 @@ public class tileManager : MonoBehaviour
         Vector3 position = RoundToCell(WorldPosition)+Vector3.one/4;
         
         List<Collider2D> colliders = Physics2D.OverlapBoxAll(position,Vector3.one/4,0,3).ToList();
+        if (_defaultTileMap.GetTile(_defaultTileMap.WorldToCell(WorldPosition)) == PathTile) return false;
         return (colliders.Where(x => x.GetComponentInParent<TowerScript>() != null && x.transform.parent.GetComponent<Tilemap>() == _defaultTileMap).Count() == 0);
     }
 }
