@@ -12,6 +12,7 @@ public class EnemyScript : MonoBehaviour, IPoolableObject<EnemyScript>
     public float _Distance { get;private set; }
     public float _Speed;
     public int _Attack;
+    public float _SpeedMultiplier = 1f;
     private int i;
     private Pool<EnemyScript> _Pool;
     public GameManager _GameManager;
@@ -43,7 +44,7 @@ public class EnemyScript : MonoBehaviour, IPoolableObject<EnemyScript>
         if (_Transform.position != _Nodes[i].position)
         {
             _Distance += _Speed * Time.deltaTime;
-            _Transform.position = Vector3.MoveTowards(transform.position, _Nodes[i].position, _Speed * Time.deltaTime);
+            _Transform.position = Vector3.MoveTowards(transform.position, _Nodes[i].position, _Speed * Time.deltaTime*_SpeedMultiplier);
         }
         else
         {

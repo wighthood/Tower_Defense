@@ -3,7 +3,7 @@ using System.Linq;
 using PoolSystem;
 using UnityEngine;
 
-public class TowerScript : MonoBehaviour
+public  class  TowerBase : MonoBehaviour
 {
     [SerializeField] private Tower tower;
     [SerializeField] private GameObject projectile;
@@ -16,29 +16,34 @@ public class TowerScript : MonoBehaviour
     private float _SpawnTimer;
     private float _Range;
     private float _timer;
-    private bool _AOE;
     public int _price { get;private  set; }
+    public bool _IsTrap { get; private set; }
     private GameObject _Target;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         _timer = 0;
         _StartPoint = transform;
-        _SpawnTimer = tower._spawnRate;
+        _SpawnTimer = tower._Cooldown;
         _Range = tower._range;
         _ProjectilePool = new ComponentPool<ProjectileScript>(projectile, _maxSpawn, _minSpawn);
         _price = tower._price;
+        _IsTrap = tower._IsTrap;
     }
 
-    private void Update()
+    protected void Update()
+    {
+        Process();
+    }
+
+    protected virtual void Process()
     {
         _timer += Time.deltaTime;
         if ((_timer <= _SpawnTimer) ) return;
         _timer = 0.0f;
         CreateNewProjectile();
     }
-
-    private void FindTarget()
+    protected virtual void FindTarget()
     {
         float x = 0;
         List<Collider2D> Targets = Physics2D.OverlapCircleAll(_StartPoint.position, _Range).Where(x =>x.GetComponent<EnemyScript>() is not null).ToList();

@@ -32,7 +32,7 @@ public class TowerManager : MonoBehaviour
         {
            
             _CurrentPreviewTower = tileManager.Place(_tower._Tower,tileManager.RoundToCell(_currentMousePosition));
-            _CurrentPreviewTower.GetComponent<TowerScript>().enabled = false;
+            _CurrentPreviewTower.GetComponent<TowerBase>().enabled = false;
             if (_CurrentPreviewTower == null)return;
             _CurrentPreviewTower.GetComponentInChildren<Collider2D>().enabled = false;
         }
@@ -58,16 +58,16 @@ public class TowerManager : MonoBehaviour
 
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(_currentMousePosition);
 
-            if (!tileManager.CanPlace(mousePos))
+            if (!tileManager.CanPlace(mousePos,_CurrentPreviewTower))
             {
                 ResetPreview();
                 return;
             }
             
-            if (_tower._Tower != null &&  gameManager._Money >= _CurrentPreviewTower.GetComponent<TowerScript>()._price)
+            if (_tower._Tower != null &&  gameManager._Money >= _CurrentPreviewTower.GetComponent<TowerBase>()._price)
             {
                 //_characterData._Inventory.TryRemoveItems(itemStructure, 1);
-                gameManager._Money -= _CurrentPreviewTower.GetComponent<TowerScript>()._price;
+                gameManager._Money -= _CurrentPreviewTower.GetComponent<TowerBase>()._price;
                 gameManager.updateMoneyText();
                 GameObject structure = tileManager.Place(_tower._Tower,mousePos);
                 if (structure == null)
@@ -103,7 +103,7 @@ public class TowerManager : MonoBehaviour
                 return;
             }
 
-            TowerScript tower = hit.collider.GetComponentInParent<TowerScript>();
+            TowerBase tower = hit.collider.GetComponentInParent<TowerBase>();
             if (tower == null)
             {
                 ResetPreview();
@@ -149,7 +149,7 @@ public class TowerManager : MonoBehaviour
         List<RaycastResult> results = new List<RaycastResult>();
         EventSystem.current.RaycastAll(customEventData, results);
 
-        if (results.Where(x => x.gameObject.GetComponentInParent<TowerScript>() == null).Count() > 0)
+        if (results.Where(x => x.gameObject.GetComponentInParent<TowerBase>() == null).Count() > 0)
         {
             return true;
         }

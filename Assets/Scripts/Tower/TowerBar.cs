@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TowerBAr : MonoBehaviour
+public class TowerBar : MonoBehaviour
 {
     [SerializeField] private TowerManager _TowerManager;
     [SerializeField] private List<Tower> _Towers = new();

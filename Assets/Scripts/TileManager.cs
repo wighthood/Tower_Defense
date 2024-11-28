@@ -47,14 +47,26 @@ public class tileManager : MonoBehaviour
         return RoundToCell(_defaultTileMap, WorldPosition);
     }
 
-    public bool CanPlace(Vector3 WorldPosition)
+    public bool CanPlace(Vector3 WorldPosition, GameObject TowerPrefab)
     {
         //return true if you can place a GameObject at the desired location
      
         Vector3 position = RoundToCell(WorldPosition)+Vector3.one/4;
         
         List<Collider2D> colliders = Physics2D.OverlapBoxAll(position,Vector3.one/4,0,3).ToList();
-        if (_defaultTileMap.GetTile(_defaultTileMap.WorldToCell(WorldPosition)) == PathTile) return false;
-        return (colliders.Where(x => x.GetComponentInParent<TowerScript>() != null && x.transform.parent.GetComponent<Tilemap>() == _defaultTileMap).Count() == 0);
+
+        if (TowerPrefab.GetComponent<TowerBase>()._IsTrap)
+        {
+            if (_defaultTileMap.GetTile(_defaultTileMap.WorldToCell(WorldPosition)) != PathTile)
+                return false;
+        }
+        else
+        {
+            if (_defaultTileMap.GetTile(_defaultTileMap.WorldToCell(WorldPosition)) == PathTile)
+            {
+                return false;
+            }
+        }
+        return (colliders.Where(x => x.GetComponentInParent<TowerBase>() != null && x.transform.parent.GetComponent<Tilemap>() == _defaultTileMap).Count() == 0);
     }
 }
