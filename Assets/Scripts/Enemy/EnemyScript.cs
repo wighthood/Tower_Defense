@@ -14,7 +14,10 @@ public class EnemyScript : MonoBehaviour, IPoolableObject<EnemyScript>
     public int _Attack;
     public float _SpeedMultiplier = 1f;
     private int i;
+    private float DecayTimer;
+    [SerializeField] float DecayTime;
     private Pool<EnemyScript> _Pool;
+    public bool _IsDead;
     public GameManager _GameManager;
 
     public UnityEvent<EnemyScript> ondeath;
@@ -30,16 +33,8 @@ public class EnemyScript : MonoBehaviour, IPoolableObject<EnemyScript>
         _Transform = transform;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void behavior()
     {
-        if (_PV <= 0)
-        {
-            _GameManager._Money += _Prime;
-            _GameManager.updateMoneyText();
-            ondeath.Invoke(this);
-            Pool.Release(this);
-        }
         if (_Nodes.Count <= 0 || i >= _Nodes.Count) return;
         if (_Transform.position != _Nodes[i].position)
         {
@@ -55,6 +50,44 @@ public class EnemyScript : MonoBehaviour, IPoolableObject<EnemyScript>
                 Pool.Release(this);
             }
             i++;
+        }
+    }
+
+    private void death()
+    {
+        _IsDead = true;
+        _GameManager._Money += _Prime;
+        _GameManager.updateMoneyText();
+        ondeath.Invoke(this);
+    }
+
+    public void Release()
+    {
+        Pool.Release(this);
+    }
+    
+    // Update is called once per frame
+    void Update()
+    {
+        if (!_IsDead)
+        {
+            if (_PV <= 0)
+            {
+                death();
+            }
+            else
+            {
+                behavior();
+            }
+        }
+        else
+        {
+            DecayTimer += Time.deltaTime;
+            if (DecayTimer >= DecayTime)
+            {
+                DecayTimer = 0;
+                Release();
+            }
         }
     }
 }

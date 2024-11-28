@@ -297,3 +297,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tower: {fileID: 11400000, guid: e225fc3e92066a448b1c94449e31b44f, type: 2}
   multiplier: 0.75
+  Capacity: 64
+  Storage: 0

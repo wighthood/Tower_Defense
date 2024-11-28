@@ -9,13 +9,12 @@ public class AcolytesStruct : StructBase
     [SerializeField] private int _maxSpawn;
     [SerializeField] private int _minSpawn;
     private ComponentPool<ProjectileScript> _ProjectilePool;
-    private Transform _StartPoint;
+    
     private Transform _EndPoint;
     private GameObject _Target;
     protected override void Awake()
     {
         base.Awake();
-        _StartPoint = transform;
         _ProjectilePool = new ComponentPool<ProjectileScript>(projectile, _maxSpawn, _minSpawn);
     }
 

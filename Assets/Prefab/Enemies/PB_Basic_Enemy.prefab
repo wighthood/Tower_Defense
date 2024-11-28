@@ -185,6 +185,7 @@ MonoBehaviour:
   _Speed: 0
   _Attack: 0
   _SpeedMultiplier: 1
+  DecayTime: 3
   _GameManager: {fileID: 0}
   ondeath:
     m_PersistentCalls:

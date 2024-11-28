@@ -6,6 +6,7 @@ public  class  StructBase : MonoBehaviour
     protected float _SpawnTimer;
     protected float _Range;
     protected float _timer;
+    protected Transform _StartPoint;
     public int _price { get;private  set; }
     public bool _IsTrap { get; private set; }
    
@@ -17,6 +18,7 @@ public  class  StructBase : MonoBehaviour
         _Range = tower._range;
         _price = tower._price;
         _IsTrap = tower._IsTrap;
+        _StartPoint = this.transform;
     }
 
     protected void Update()

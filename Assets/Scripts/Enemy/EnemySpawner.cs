@@ -51,6 +51,7 @@ public class EnemySpawner : MonoBehaviour
         {
             enemy._Nodes.Add(node);
         }
+        enemy._IsDead = false;
         enemy._Nodes.Add(_EndPoint);
         enemy._GameManager = _GameManager;
         enemy.transform.position = _StartPoint.position;
