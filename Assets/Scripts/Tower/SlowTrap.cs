@@ -9,7 +9,7 @@ public class SlowTrap  : StructBase
     public int Storage;
     protected override void Process()
     {
-        if (Storage < Capacity && _timer>_Cooldown)
+        if (Storage < Capacity)
         {
             List<Collider2D> Targets = Physics2D.OverlapCircleAll(_StartPoint.position, _Range).Where(x =>x.GetComponent<EnemyScript>() is not null).ToList();
             foreach (Collider2D Target in Targets)

@@ -23,12 +23,12 @@ public  class  StructBase : MonoBehaviour
 
     protected void Update()
     {
+        _timer += Time.deltaTime;
+        if ((_timer <= _Cooldown)) return;
+        _timer = 0.0f;
         Process();
     }
 
-    protected virtual void Process()
-    {
-        _timer += Time.deltaTime;
-    }
+    protected virtual void Process() { }
     
 }

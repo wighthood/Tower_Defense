@@ -20,9 +20,6 @@ public class AcolytesStruct : StructBase
 
     protected override void Process()
     {
-        base.Process();
-        if ((_timer <= _Cooldown) ) return;
-        _timer = 0.0f;
         CreateNewProjectile();
     }
     
