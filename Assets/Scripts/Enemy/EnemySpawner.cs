@@ -59,6 +59,7 @@ public class EnemySpawner : MonoBehaviour
         enemy._Attack = _Enemies[EnemyToSpawn].Enemy._Attack;
         enemy._Speed = _Enemies[EnemyToSpawn].Enemy._Speed;
         enemy._Prime = _Enemies[EnemyToSpawn].Enemy._Prime;
+        enemy._AttackSpeed = _Enemies[EnemyToSpawn].Enemy._AttackSpeed;
         enemy._SpeedMultiplier = 1f;
         _AliveEnemies.Add(enemy);
         return enemy;

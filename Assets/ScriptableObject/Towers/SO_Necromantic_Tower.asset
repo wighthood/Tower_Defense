@@ -9,11 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f66271be17ae6244b17133e65dcda02, type: 3}
-  m_Name: SO_BasicEnemy
+  m_Script: {fileID: 11500000, guid: 1539278e57886134bafa5033740b62ad, type: 3}
+  m_Name: SO_Necromantic_Tower
   m_EditorClassIdentifier: 
-  _PV: 10
-  _Speed: 3
-  _Attack: 1
-  _AttackSpeed: 0.5
-  _Prime: 3
+  towerPrefab: {fileID: 2158587185780753936, guid: e6334a44be7d52248940a5c2955f089b, type: 3}
+  _Cooldown: 2
+  _range: 3
+  _price: 20
+  _IsTrap: 0

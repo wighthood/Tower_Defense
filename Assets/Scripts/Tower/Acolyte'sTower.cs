@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using System.Linq;
 using PoolSystem;
 using UnityEngine;
 
@@ -15,6 +13,7 @@ public class AcolytesStruct : StructBase
     protected override void Awake()
     {
         base.Awake();
+          _ContactFilter.layerMask = LayerMask.GetMask("Ennemy");
         _ProjectilePool = new ComponentPool<ProjectileScript>(projectile, _maxSpawn, _minSpawn);
     }
 
@@ -26,10 +25,10 @@ public class AcolytesStruct : StructBase
    private void FindTarget()
     {
         float x = 0;
-        List<Collider2D> Targets = Physics2D.OverlapCircleAll(_StartPoint.position, _Range).Where(x =>x.GetComponent<EnemyScript>() is not null).ToList();
-        foreach (var target in Targets)
+        Physics2D.OverlapCircle(_StartPoint.position, _Range, _ContactFilter, Collider);
+        foreach (var target in Collider) 
         {
-            if (target.GetComponent<EnemyScript>()._Distance > x && target.GetComponent<EnemyScript>()._PV >0)
+            if (target.GetComponent<EnemyScript>()._Distance > x && target.GetComponent<EnemyScript>()._PV > 0)
             {
                 x = target.GetComponent<EnemyScript>()._Distance;
                 _Target = target.gameObject;

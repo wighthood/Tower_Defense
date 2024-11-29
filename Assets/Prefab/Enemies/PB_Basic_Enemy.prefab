@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5797617564006366940}
   - component: {fileID: 3556651135433010862}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: EnemySprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 462187999846140876}
   - component: {fileID: 2222694599685898681}
   - component: {fileID: 204628636445911635}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PB_Basic_Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -185,7 +185,9 @@ MonoBehaviour:
   _Speed: 0
   _Attack: 0
   _SpeedMultiplier: 1
+  _AttackSpeed: 0
   DecayTime: 3
+  _IsDead: 0
   _GameManager: {fileID: 0}
   ondeath:
     m_PersistentCalls:

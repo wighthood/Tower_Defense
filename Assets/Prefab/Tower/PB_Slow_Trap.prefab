@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4296538979010222093}
   - component: {fileID: 1907387629116033662}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +97,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8150730011851430627}
   - component: {fileID: 1674502725198304826}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -186,7 +186,7 @@ GameObject:
   - component: {fileID: 9219944627040830386}
   - component: {fileID: 1266270614083536240}
   - component: {fileID: 1503971577638758702}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: PB_Slow_Trap
   m_TagString: Untagged
   m_Icon: {fileID: 0}

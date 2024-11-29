@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using NUnit.Framework.Internal.Filters;
 using PoolSystem;
 using UnityEngine;
 
@@ -7,15 +8,18 @@ public class NecromanticTower : StructBase
 {
     [SerializeField] private int _maxSpawn;
     [SerializeField] private int _minSpawn;
-    [SerializeField] private GameObject _Rallypoint;
+    [SerializeField] private Transform _Rallypoint;
     [SerializeField] private GameObject _UndeadWarrior;
-    private GameObject _Storage;
-    private ComponentPool<ProjectileScript> _UndeadPool;
-
+    [SerializeField] private Undead _Undead;
+    
+    private SlowTrap _Storage;
+    private EnemyScript Corpse;
+    private ComponentPool<UndeadScript> _UndeadPool;
+    private List<UndeadScript> ActiveUndead;
     protected override void Awake()
     {
         base.Awake();
-        _UndeadPool = new ComponentPool<ProjectileScript>(_UndeadWarrior, _maxSpawn, _minSpawn);
+        _UndeadPool = new ComponentPool<UndeadScript>(_UndeadWarrior, _maxSpawn, _minSpawn);
     }
 
     protected override void Process()
@@ -25,20 +29,48 @@ public class NecromanticTower : StructBase
 
     private void  SummonNewUndead()
     {
-        if (FindCorpseStorage())
-        { 
-            Debug.Log("Summonned undead");
+        if (FindCorpseStorage() || FindCorpse())
+        {
+            if (_Storage != null && _Storage.Storage>0)
+                _Storage.Storage--;
+            else if (Corpse != null)
+            {
+                Corpse.Release();
+                Corpse = null;
+            }
+            UndeadScript newUndead = _UndeadPool.Get(); 
+            newUndead.transform.position = _Rallypoint.position;
+            newUndead._PV = _Undead._PV;
+            newUndead._Speed = _Undead._Speed;
+            newUndead._Attack = _Undead._Attack;
+            newUndead._AttackSpeed = _Undead._AttackSpeed;
+            newUndead._Rallypoint = _Rallypoint;
+            ActiveUndead.Add(newUndead);
         }
     }
 
     private bool FindCorpse()
     {
+        _ContactFilter.layerMask = LayerMask.GetMask("Ennemy");
+        Physics2D.OverlapCircle(_StartPoint.position, _Range, _ContactFilter, Collider);
+        if (Collider != null)
+        {
+            List<Collider2D> CorpseCollider = Collider.Where(x => x.GetComponent<EnemyScript>() is not null).ToList();
+            foreach (var corpse in CorpseCollider)
+            {
+                Corpse = corpse.GetComponent<EnemyScript>();
+                if (Corpse._IsDead)
+                    return true;
+            }
+        }
         return false;
     }
     private bool FindCorpseStorage()
     {
-        List<Collider2D> StorageCollider = Physics2D.OverlapCircleAll(_StartPoint.position, _Range).Where(x => x.GetComponent<SlowTrap>() is not null).ToList();
-        _Storage = StorageCollider[0].gameObject;
+        _ContactFilter.layerMask = LayerMask.GetMask("CorpseStorage");
+        Physics2D.OverlapCircle(_StartPoint.position, _Range, _ContactFilter, Collider);
+        if(Collider.Count == 0) return false;
+        _Storage = Collider[0].GetComponent<SlowTrap>();
         return true;
     }
 }

@@ -9,7 +9,7 @@ public class tileManager : MonoBehaviour
     [SerializeField]
     private Tilemap _defaultTileMap;
 
-    [SerializeField] private Tile PathTile;
+    [SerializeField] private List<Tile> PathTile;
 
     public Vector3 _TileOffset { get; private set; } = new Vector3(0.5f,0.5f,0);
     
@@ -57,14 +57,20 @@ public class tileManager : MonoBehaviour
 
         if (TowerPrefab.GetComponent<StructBase>()._IsTrap)
         {
-            if (_defaultTileMap.GetTile(_defaultTileMap.WorldToCell(WorldPosition)) != PathTile)
-                return false;
+            foreach (var tile in PathTile)
+            {
+                if (_defaultTileMap.GetTile(_defaultTileMap.WorldToCell(WorldPosition)) != tile)
+                    return false;
+            }
         }
         else
         {
-            if (_defaultTileMap.GetTile(_defaultTileMap.WorldToCell(WorldPosition)) == PathTile)
+            foreach (var tile in PathTile)
             {
-                return false;
+                if (_defaultTileMap.GetTile(_defaultTileMap.WorldToCell(WorldPosition)) == tile)
+                {
+                    return false;
+                }
             }
         }
         return (colliders.Where(x => x.GetComponentInParent<StructBase>() != null && x.transform.parent.GetComponent<Tilemap>() == _defaultTileMap).Count() == 0);

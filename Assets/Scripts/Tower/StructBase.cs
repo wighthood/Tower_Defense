@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public  class  StructBase : MonoBehaviour
@@ -7,6 +8,8 @@ public  class  StructBase : MonoBehaviour
     protected float _Range;
     protected float _timer;
     protected Transform _StartPoint;
+    protected ContactFilter2D _ContactFilter;
+    protected List<Collider2D> Collider = new List<Collider2D>();
     public int _price { get;private  set; }
     public bool _IsTrap { get; private set; }
    

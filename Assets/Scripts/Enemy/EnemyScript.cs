@@ -13,6 +13,7 @@ public class EnemyScript : MonoBehaviour, IPoolableObject<EnemyScript>
     public float _Speed;
     public int _Attack;
     public float _SpeedMultiplier = 1f;
+    public float _AttackSpeed;
     private int i;
     private float DecayTimer;
     [SerializeField] float DecayTime;
