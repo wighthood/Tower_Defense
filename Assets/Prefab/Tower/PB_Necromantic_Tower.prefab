@@ -214,9 +214,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tower: {fileID: 11400000, guid: a98b53600b1da744a91b40bbabb1a98c, type: 2}
   _maxSpawn: 2
-  _minSpawn: 2
+  _minSpawn: 1
   _Rallypoint: {fileID: 7960827998847291010}
-  _UndeadWarrior: {fileID: 6838615377099667522, guid: c19715f86283e644fb351bb2ba318898, type: 3}
+  _UndeadWarrior: {fileID: 5951186792177298681, guid: 0be26a3f72539514587af8f0e87fab2e, type: 3}
   _Undead: {fileID: 11400000, guid: da8b9936b9a549b478755a96db06199a, type: 2}
 --- !u!1 &4134007629678585268
 GameObject:

@@ -16,3 +16,4 @@ MonoBehaviour:
   _Speed: 3
   _Attack: 1
   _AttackSpeed: 0.5
+  _LifeTime: 5

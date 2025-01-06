@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using NUnit.Framework.Internal.Filters;
 using PoolSystem;
 using UnityEngine;
 
@@ -15,7 +14,7 @@ public class NecromanticTower : StructBase
     private SlowTrap _Storage;
     private EnemyScript Corpse;
     private ComponentPool<UndeadScript> _UndeadPool;
-    private List<UndeadScript> ActiveUndead;
+    private List<UndeadScript> ActiveUndead = new List<UndeadScript>();
     protected override void Awake()
     {
         base.Awake();
@@ -39,16 +38,23 @@ public class NecromanticTower : StructBase
                 Corpse = null;
             }
             UndeadScript newUndead = _UndeadPool.Get(); 
+            newUndead.ondeath.AddListener(removeUndead);
             newUndead.transform.position = _Rallypoint.position;
             newUndead._PV = _Undead._PV;
             newUndead._Speed = _Undead._Speed;
             newUndead._Attack = _Undead._Attack;
             newUndead._AttackSpeed = _Undead._AttackSpeed;
+            newUndead._LifeTime = _Undead._LifeTime;
             newUndead._Rallypoint = _Rallypoint;
             ActiveUndead.Add(newUndead);
         }
     }
 
+    private void removeUndead(UndeadScript undead)
+    {
+        ActiveUndead.Remove(undead);
+    }
+    
     private bool FindCorpse()
     {
         _ContactFilter.layerMask = LayerMask.GetMask("Ennemy");

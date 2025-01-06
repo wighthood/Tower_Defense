@@ -18,13 +18,25 @@ public class UndeadScript : MonoBehaviour , IPoolableObject<UndeadScript>
     {
         get => UndeadPool; set => UndeadPool = value;
     }
+
+    private void LifeTime()
+    {
+            _LifeTimer = 0;
+            Death();
+    }
     private void Update()
     {
         _LifeTimer += Time.deltaTime;
-        if (_LifeTimer >= _LifeTime || _PV<=0)
+        if (_LifeTimer >= _LifeTime || _PV <= 0)
         {
-            _LifeTimer = 0;
-            UndeadPool.Release(this);
+            LifeTime();
         }
     }
+
+    private void Death()
+    {
+        ondeath.Invoke(this);
+        Pool.Release(this);
+    }
+    
 }

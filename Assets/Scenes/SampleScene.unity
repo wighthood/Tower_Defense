@@ -340,17 +340,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2105466360}
     m_Modifications:
-    - target: {fileID: -7274037429535322427, guid: e6334a44be7d52248940a5c2955f089b, type: 3}
-      propertyPath: _UndeadWarrior
-      value: 
-      objectReference: {fileID: 6838615377099667522, guid: c19715f86283e644fb351bb2ba318898, type: 3}
     - target: {fileID: 2158587185780753936, guid: e6334a44be7d52248940a5c2955f089b, type: 3}
       propertyPath: m_Name
       value: PB_Necromantic_Tower
-      objectReference: {fileID: 0}
-    - target: {fileID: 2158587185780753936, guid: e6334a44be7d52248940a5c2955f089b, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5835530065508518588, guid: e6334a44be7d52248940a5c2955f089b, type: 3}
       propertyPath: m_LocalPosition.x

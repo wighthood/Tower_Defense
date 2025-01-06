@@ -51,7 +51,7 @@ public class tileManager : MonoBehaviour
     {
         //return true if you can place a GameObject at the desired location
      
-        Vector3 position = RoundToCell(WorldPosition)+Vector3.one/4;
+        Vector3 position = RoundToCell(WorldPosition)+Vector3.one;
         
         List<Collider2D> colliders = Physics2D.OverlapBoxAll(position,Vector3.one/4,0,3).ToList();
 
@@ -59,12 +59,15 @@ public class tileManager : MonoBehaviour
         {
             foreach (var tile in PathTile)
             {
-                if (_defaultTileMap.GetTile(_defaultTileMap.WorldToCell(WorldPosition)) != tile)
-                    return false;
+                if (_defaultTileMap.GetTile(_defaultTileMap.WorldToCell(WorldPosition)) == tile)
+                {
+                    return true;
+                }
             }
         }
         else
         {
+            Debug.Log("test");
             foreach (var tile in PathTile)
             {
                 if (_defaultTileMap.GetTile(_defaultTileMap.WorldToCell(WorldPosition)) == tile)
