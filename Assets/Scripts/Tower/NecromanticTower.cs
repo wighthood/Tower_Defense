@@ -46,6 +46,8 @@ public class NecromanticTower : StructBase
             newUndead._AttackSpeed = _Undead._AttackSpeed;
             newUndead._LifeTime = _Undead._LifeTime;
             newUndead._Rallypoint = _Rallypoint;
+            newUndead._VisionRange = _Undead._VisionRange;
+            
             ActiveUndead.Add(newUndead);
         }
     }
@@ -66,16 +68,20 @@ public class NecromanticTower : StructBase
             {
                 Corpse = corpse.GetComponent<EnemyScript>();
                 if (Corpse._IsDead)
+                {
                     return true;
+                }
             }
         }
+        Corpse = null;
         return false;
     }
     private bool FindCorpseStorage()
     {
         _ContactFilter.layerMask = LayerMask.GetMask("CorpseStorage");
-        Physics2D.OverlapCircle(_StartPoint.position, _Range, _ContactFilter, Collider);
+        Physics2D.OverlapCircle(_StartPoint.position, _Range,_ContactFilter , Collider);
         if(Collider.Count == 0) return false;
+        Debug.Log("foundstorage");
         _Storage = Collider[0].GetComponent<SlowTrap>();
         return true;
     }

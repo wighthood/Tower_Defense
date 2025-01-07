@@ -7,13 +7,13 @@ public class AcolytesStruct : StructBase
     [SerializeField] private int _maxSpawn;
     [SerializeField] private int _minSpawn;
     private ComponentPool<ProjectileScript> _ProjectilePool;
-    
     private Transform _EndPoint;
     private GameObject _Target;
     protected override void Awake()
     {
         base.Awake();
           _ContactFilter.layerMask = LayerMask.GetMask("Ennemy");
+          _ContactFilter.useLayerMask = true;
         _ProjectilePool = new ComponentPool<ProjectileScript>(projectile, _maxSpawn, _minSpawn);
     }
 

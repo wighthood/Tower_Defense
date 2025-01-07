@@ -24,8 +24,12 @@ public class ProjectileScript : MonoBehaviour, IPoolableObject<ProjectileScript>
     }
 
     private void Update()
-    { 
-        if (target == null)return;
+    {
+        if (target == null) return;
+        if (target.GetComponent<EnemyScript>()._IsDead)
+        {
+            Pool.Release(this);
+        }
         _transform.position = Vector3.MoveTowards(_transform.position, target.transform.position, _speed * Time.deltaTime);
         if (_transform.position != target.transform.position) return;
         DealDamage();

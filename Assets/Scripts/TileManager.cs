@@ -67,7 +67,6 @@ public class tileManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("test");
             foreach (var tile in PathTile)
             {
                 if (_defaultTileMap.GetTile(_defaultTileMap.WorldToCell(WorldPosition)) == tile)
@@ -75,7 +74,8 @@ public class tileManager : MonoBehaviour
                     return false;
                 }
             }
+            return (colliders.Where(x => x.GetComponentInParent<StructBase>() != null && x.transform.parent.GetComponent<Tilemap>() == _defaultTileMap).Count() == 0);
         }
-        return (colliders.Where(x => x.GetComponentInParent<StructBase>() != null && x.transform.parent.GetComponent<Tilemap>() == _defaultTileMap).Count() == 0);
+        return false;
     }
 }

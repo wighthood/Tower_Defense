@@ -22,6 +22,7 @@ public  class  StructBase : MonoBehaviour
         _price = tower._price;
         _IsTrap = tower._IsTrap;
         _StartPoint = this.transform;
+        _ContactFilter.useLayerMask = true;
     }
 
     protected void Update()
