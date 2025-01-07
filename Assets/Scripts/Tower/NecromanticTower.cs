@@ -47,6 +47,7 @@ public class NecromanticTower : StructBase
             newUndead._LifeTime = _Undead._LifeTime;
             newUndead._Rallypoint = _Rallypoint;
             newUndead._VisionRange = _Undead._VisionRange;
+            newUndead._CoolDown = _Undead._Cooldown;
             
             ActiveUndead.Add(newUndead);
         }

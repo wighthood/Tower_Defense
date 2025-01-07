@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using PoolSystem;
 using UnityEngine;
@@ -36,8 +37,20 @@ public class UndeadScript : MonoBehaviour , IPoolableObject<UndeadScript>
             _LifeTimer = 0;
             Death();
     }
-    private void Update()
+
+    private void Behaviour()
     {
+        if (_target == null)return;
+        _target.ondeath.AddListener(RemoveTarget);
+        _target._SpeedMultiplier = 0;
+    }
+
+    private void RemoveTarget(EnemyScript target)
+    {
+        _target = null;
+    }
+    private void Update()
+    {   
         _LifeTimer += Time.deltaTime;
         _TargettingTimer += Time.deltaTime;
         if (_LifeTimer >= _LifeTime || _PV <= 0)
@@ -45,23 +58,39 @@ public class UndeadScript : MonoBehaviour , IPoolableObject<UndeadScript>
             LifeTime();
         }
         
-        if (_target == null && _TargettingTimer >= _CoolDown)
+        if (_target == null)
         {
-            _TargettingTimer = 0;
-            if (findTarget())
+            if (_TargettingTimer >= _CoolDown)
             {
-                
+                _TargettingTimer = 0;
+                if (findTarget())
+                {
+                    Behaviour();
+                }
             }
             else
             {
                 transform.position = Vector3.MoveTowards(transform.position, _Rallypoint.position, _Speed * Time.deltaTime);
             }
         }
+        else
+        {
+            
+            Vector3 distance = _target.transform.position - _Rallypoint.position;
+            if (distance.magnitude < _VisionRange)
+            {
+                transform.position = Vector3.MoveTowards(transform.position, _target.gameObject.transform.position,
+                    _Speed * Time.deltaTime);
+            }
+            else
+            {
+                _target = null;
+            }
+        }
     }
 
     
-    
-    
+
     private bool findTarget()
     {
         float x = 0;
@@ -83,6 +112,12 @@ public class UndeadScript : MonoBehaviour , IPoolableObject<UndeadScript>
     
     private void Death()
     {
+        if (_target != null)
+        {
+            _target.ondeath.RemoveListener(RemoveTarget);
+            _target._SpeedMultiplier = 1f;
+            _target = null;
+        }
         ondeath.Invoke(this);
         Pool.Release(this);
     }

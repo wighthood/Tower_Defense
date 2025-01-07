@@ -45,6 +45,7 @@ public class EnemySpawner : MonoBehaviour
         }
         _Counts[EnemyToSpawn]++;
         EnemyScript enemy = _EnemyPool.Get();
+        enemy.ondeath.RemoveAllListeners();
         enemy.ondeath.AddListener(RemoveEnnemy);
         enemy._Nodes.Clear();
         foreach (var node in Nodes)

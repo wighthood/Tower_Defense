@@ -30,10 +30,11 @@ public class TowerManager : MonoBehaviour
 
         if (_CurrentPreviewTower == null )
         {
-           
             _CurrentPreviewTower = tileManager.Place(_tower._Tower,tileManager.RoundToCell(_currentMousePosition));
             _CurrentPreviewTower.GetComponent<StructBase>().enabled = false;
             _CurrentPreviewTower.GetComponentInChildren<SpriteRenderer>().enabled = true;
+            _CurrentPreviewTower.transform.GetChild(0).localScale =
+                Vector3.one * _CurrentPreviewTower.GetComponent<StructBase>()._Range *2;
             if (_CurrentPreviewTower == null)return;
             _CurrentPreviewTower.GetComponentInChildren<Collider2D>().enabled = false;
         }

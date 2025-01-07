@@ -5,7 +5,7 @@ public  class  StructBase : MonoBehaviour
 {
     [SerializeField] private Tower tower;
     protected float _Cooldown;
-    protected float _Range;
+    public float _Range { protected set; get; }
     protected float _timer;
     protected Transform _StartPoint;
     protected ContactFilter2D _ContactFilter;
@@ -13,7 +13,11 @@ public  class  StructBase : MonoBehaviour
     public int _price { get;private  set; }
     public bool _IsTrap { get; private set; }
    
-
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, tower._range);
+    }
     protected virtual void Awake()
     {
         _timer = 0;

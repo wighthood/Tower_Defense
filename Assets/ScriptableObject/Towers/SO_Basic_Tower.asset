@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: SO_Basic_Tower
   m_EditorClassIdentifier: 
   towerPrefab: {fileID: 2158587185780753936, guid: 68cf612fc6f1a3c4499d92895bf3c43a, type: 3}
-  _spawnRate: 0.5
-  _range: 3
+  _Cooldown: 0.5
+  _range: 2
   _price: 10
+  _IsTrap: 0
