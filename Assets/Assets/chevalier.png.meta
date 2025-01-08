@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 33e5d4f23b3fcd24592442f47bd119e0
+guid: f005c8d4afd536247a7ecf8e7055e9b6
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2188430308239922245
-    second: texturee-soil-5_0
+      213: -1276402802834943683
+    second: chevalier_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: texturee-soil-5_0
+      name: chevalier_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 1080
-        height: 1080
+        x: 226
+        y: 46
+        width: 713
+        height: 957
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: bbb29adba3221a1e0800000000000000
-      internalID: -2188430308239922245
+      spriteID: d31d5bad96e494ee0800000000000000
+      internalID: -1276402802834943683
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      texturee-soil-5_0: -2188430308239922245
+      chevalier_0: -1276402802834943683
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

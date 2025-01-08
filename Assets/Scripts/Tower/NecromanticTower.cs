@@ -62,6 +62,7 @@ public class NecromanticTower : StructBase
     private bool FindCorpse()
     {
         _ContactFilter.layerMask = LayerMask.GetMask("Ennemy");
+        _ContactFilter.useLayerMask = true;
         Physics2D.OverlapCircle(_StartPoint.position, _Range, _ContactFilter, Collider);
         if (Collider != null)
         {
@@ -81,6 +82,7 @@ public class NecromanticTower : StructBase
     private bool FindCorpseStorage()
     {
         _ContactFilter.layerMask = LayerMask.GetMask("CorpseStorage");
+        _ContactFilter.useLayerMask = true;
         Physics2D.OverlapCircle(_StartPoint.position, _Range,_ContactFilter , Collider);
         if(Collider.Count == 0) return false;
         Debug.Log("foundstorage");
