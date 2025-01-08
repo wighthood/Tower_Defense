@@ -16,10 +16,12 @@ public class EnemyScript : MonoBehaviour, IPoolableObject<EnemyScript>
     public float _AttackSpeed;
     private int i;
     private float DecayTimer;
+    private float CoolDownTimer;
     [SerializeField] float DecayTime;
     private Pool<EnemyScript> _Pool;
     public bool _IsDead;
     public GameManager _GameManager;
+    public UndeadScript _Undead;
 
     public UnityEvent<EnemyScript> ondeath;
     public Pool<EnemyScript> Pool
@@ -52,6 +54,15 @@ public class EnemyScript : MonoBehaviour, IPoolableObject<EnemyScript>
             }
             i++;
         }
+        if (_Undead != null)
+        {
+            CoolDownTimer += Time.deltaTime * _AttackSpeed;
+            if (CoolDownTimer >= 1)
+            {
+                CoolDownTimer = 0;
+                _Undead._PV -= _Attack;
+            }
+        }
     }
 
     private void death()
@@ -80,10 +91,12 @@ public class EnemyScript : MonoBehaviour, IPoolableObject<EnemyScript>
             {
                 behavior();
             }
+
+      
         }
         else
         {
-            DecayTimer += Time.deltaTime;
+           DecayTimer += Time.deltaTime;
             if (DecayTimer >= DecayTime)
             {
                 DecayTimer = 0;
@@ -92,3 +105,4 @@ public class EnemyScript : MonoBehaviour, IPoolableObject<EnemyScript>
         }
     }
 }
+

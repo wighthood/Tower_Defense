@@ -44,9 +44,14 @@ public class UndeadScript : MonoBehaviour , IPoolableObject<UndeadScript>
         Vector3 TargetDistance = _target.transform.position - transform.position;
         if (TargetDistance.magnitude < _AttackRange)
         {
+            if (_target._Undead == null)
+            {
+                _target._Undead = this;
+            }
             _AttackDelay += Time.deltaTime * _AttackSpeed;
             if (_AttackDelay > 1)
             {
+                _AttackDelay = 0;
                 _target._PV -= _Attack;
             }
         }
@@ -125,6 +130,7 @@ public class UndeadScript : MonoBehaviour , IPoolableObject<UndeadScript>
     {
         if (_target != null)
         {
+            _target._Undead = null;
             _target.ondeath.RemoveListener(RemoveTarget);
             _target._SpeedMultiplier = 1f;
             _target = null;

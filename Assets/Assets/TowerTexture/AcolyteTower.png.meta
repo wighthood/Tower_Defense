@@ -1,10 +1,16 @@
 fileFormatVersion: 2
-guid: f638e55402eed0743bb40f6b0ec90414
+guid: 9f8c8152a3cd7a04ba336b8e3126db26
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2997497022952476964
-    second: chevalier 1_0
+      213: -6296510077327371480
+    second: AcolyteTower_0
+  - first:
+      213: -7370650894419989592
+    second: AcolyteTower_1
+  - first:
+      213: -3118944282567298631
+    second: AcolyteTower_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +106,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: chevalier 1_0
+      name: AcolyteTower_0
       rect:
         serializedVersion: 2
-        x: 226
-        y: 46
-        width: 843
-        height: 957
+        x: 415
+        y: 955
+        width: 54
+        height: 33
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +121,52 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: cde60abc650c666d0800000000000000
-      internalID: -2997497022952476964
+      spriteID: 8231c3ce17d4e98a0800000000000000
+      internalID: -6296510077327371480
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AcolyteTower_1
+      rect:
+        serializedVersion: 2
+        x: 661
+        y: 955
+        width: 54
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8ab6eaa101036b990800000000000000
+      internalID: -7370650894419989592
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AcolyteTower_2
+      rect:
+        serializedVersion: 2
+        x: 226
+        y: 97
+        width: 681
+        height: 839
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9b1375b23b847b4d0800000000000000
+      internalID: -3118944282567298631
       vertices: []
       indices: 
       edges: []
@@ -135,7 +185,9 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      chevalier 1_0: -2997497022952476964
+      AcolyteTower_0: -6296510077327371480
+      AcolyteTower_1: -7370650894419989592
+      AcolyteTower_2: -3118944282567298631
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

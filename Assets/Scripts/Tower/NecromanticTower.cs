@@ -11,6 +11,8 @@ public class NecromanticTower : StructBase
     [SerializeField] private GameObject _UndeadWarrior;
     [SerializeField] private Undead _Undead;
     
+    private ContactFilter2D _ContactFilter2;
+    private List<Collider2D> Collider2 = new List<Collider2D>();
     private SlowTrap _Storage;
     private EnemyScript Corpse;
     private ComponentPool<UndeadScript> _UndeadPool;
@@ -26,31 +28,43 @@ public class NecromanticTower : StructBase
         SummonNewUndead();
     }
 
+    private void SpawnUndead()
+    {
+        UndeadScript newUndead = _UndeadPool.Get(); 
+        newUndead.ondeath.AddListener(removeUndead);
+        newUndead.transform.position = _Rallypoint.position;
+        newUndead._PV = _Undead._PV;
+        newUndead._Speed = _Undead._Speed;
+        newUndead._Attack = _Undead._Attack;
+        newUndead._AttackSpeed = _Undead._AttackSpeed;
+        newUndead._AttackRange = _Undead._AttackRange;
+        newUndead._LifeTime = _Undead._LifeTime;
+        newUndead._Rallypoint = _Rallypoint;
+        newUndead._VisionRange = _Undead._VisionRange;
+        newUndead._CoolDown = _Undead._Cooldown;
+            
+        ActiveUndead.Add(newUndead);
+    }
+    
     private void  SummonNewUndead()
     {
         if (FindCorpseStorage() || FindCorpse())
         {
-            if (_Storage != null && _Storage.Storage>0)
-                _Storage.Storage--;
-            else if (Corpse != null)
+            if (_Storage != null)
+            {
+                if (_Storage.Storage > 0)
+                {
+                   _Storage.Storage--;
+                   SpawnUndead();
+                   return;
+                } 
+            }
+            if (Corpse != null)
             {
                 Corpse.Release();
                 Corpse = null;
+                SpawnUndead();
             }
-            UndeadScript newUndead = _UndeadPool.Get(); 
-            newUndead.ondeath.AddListener(removeUndead);
-            newUndead.transform.position = _Rallypoint.position;
-            newUndead._PV = _Undead._PV;
-            newUndead._Speed = _Undead._Speed;
-            newUndead._Attack = _Undead._Attack;
-            newUndead._AttackSpeed = _Undead._AttackSpeed;
-            newUndead._AttackRange = _Undead._AttackRange;
-            newUndead._LifeTime = _Undead._LifeTime;
-            newUndead._Rallypoint = _Rallypoint;
-            newUndead._VisionRange = _Undead._VisionRange;
-            newUndead._CoolDown = _Undead._Cooldown;
-            
-            ActiveUndead.Add(newUndead);
         }
     }
 
@@ -80,13 +94,10 @@ public class NecromanticTower : StructBase
         return false;
     }
     private bool FindCorpseStorage()
-    {
-        _ContactFilter.layerMask = LayerMask.GetMask("CorpseStorage");
-        _ContactFilter.useLayerMask = true;
-        Physics2D.OverlapCircle(_StartPoint.position, _Range,_ContactFilter , Collider);
-        if(Collider.Count == 0) return false;
-        Debug.Log("foundstorage");
-        _Storage = Collider[0].GetComponent<SlowTrap>();
+    { 
+        Collider2 = Physics2D.OverlapCircleAll(_StartPoint.position, _Range, 1<<7).ToList();
+        if(Collider2.Count == 0) return false;
+        _Storage = Collider2[0].GetComponent<SlowTrap>();
         return true;
     }
 }

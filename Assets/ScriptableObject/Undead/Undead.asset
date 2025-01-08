@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31381ae9e3bb780479cbd94121fbc69a, type: 3}
   m_Name: Undead
   m_EditorClassIdentifier: 
-  _PV: 10
+  _PV: 5
   _Speed: 3
   _Attack: 1
   _AttackSpeed: 1
