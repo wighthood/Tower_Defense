@@ -7,6 +7,7 @@ public class Undead : ScriptableObject
     public float _Speed;
     public int _Attack;
     public float _AttackSpeed;
+    public float _AttackRange; 
     public float _LifeTime;
     public float _VisionRange;
     public float _Cooldown;

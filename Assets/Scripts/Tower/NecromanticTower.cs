@@ -44,6 +44,7 @@ public class NecromanticTower : StructBase
             newUndead._Speed = _Undead._Speed;
             newUndead._Attack = _Undead._Attack;
             newUndead._AttackSpeed = _Undead._AttackSpeed;
+            newUndead._AttackRange = _Undead._AttackRange;
             newUndead._LifeTime = _Undead._LifeTime;
             newUndead._Rallypoint = _Rallypoint;
             newUndead._VisionRange = _Undead._VisionRange;

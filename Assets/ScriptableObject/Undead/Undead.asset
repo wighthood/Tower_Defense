@@ -15,7 +15,8 @@ MonoBehaviour:
   _PV: 10
   _Speed: 3
   _Attack: 1
-  _AttackSpeed: 0.5
+  _AttackSpeed: 1
+  _AttackRange: 0.5
   _LifeTime: 5
   _VisionRange: 1.5
   _Cooldown: 0.5
