@@ -1,11 +1,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Image = UnityEngine.UI.Image;
 
 public class SlowTrap  : StructBase
 {
     [SerializeField] private float multiplier = .75f;
     [SerializeField] private int Capacity;
+    [SerializeField] private Image StorageVisual;
     public int Storage;
 
     protected override void Awake()
@@ -16,6 +18,7 @@ public class SlowTrap  : StructBase
 
     protected override void Process()
     {
+        StorageVisual.fillAmount = (float)Storage / Capacity;
         if (Storage < Capacity)
         {
             Physics2D.OverlapCircle(_StartPoint.position, _Range, _ContactFilter, Collider);

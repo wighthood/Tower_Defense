@@ -9,13 +9,13 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _MoneyText;
     [SerializeField] private TextMeshProUGUI _GameOverText;
     [SerializeField] private GameObject _GameOverPanel;
-
+    
     private void Awake()
     {
         updateLivesText();
         updateMoneyText();
     }
-
+    
     public void updateLivesText()
     {
         _LivesText.SetText("Lives : " + _Lives);

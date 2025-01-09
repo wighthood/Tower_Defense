@@ -15,7 +15,6 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private int _minSpawn;
     [SerializeField] private GameManager _GameManager;
     [SerializeField] private GameObject _Enemy;
-    //private Dictionary<EnemyType,Pool<EnemyScript>> _Pools = new ();
     private ComponentPool<EnemyScript> _EnemyPool;
     private float _timer;
     private Transform _StartPoint;
@@ -23,47 +22,45 @@ public class EnemySpawner : MonoBehaviour
     void OnEnable()
     {
         _StartPoint = transform;
-        //_Pools.Clear();
-       /* foreach (var enemy in _Enemies)
-        {
-            if (_Pools.ContainsKey(enemy.Enemy.Type)) continue;
-            _Pools[enemy.Enemy.Type] = new ComponentPool<EnemyScript>(enemy.Enemy,_maxSpawn,_spawnRate);
-        }*/
         _EnemyPool = new ComponentPool<EnemyScript>(_Enemy, _maxSpawn, _minSpawn);
         _timer = 0.0f;
     }
     
     public EnemyScript CreateNewEnemy()
     {
-        EnemyToSpawn = Random.Range(0, _Enemies.Count);
-        if (_Counts[EnemyToSpawn] >= _Enemies[EnemyToSpawn].Quantity)
+        for (int i = 0; i < _Enemies.Count; i++)
         {
-            _Enemies.RemoveAt(EnemyToSpawn);
-            _Counts.RemoveAt(EnemyToSpawn);
-            if (_Enemies.Count == 0) return null;
-            CreateNewEnemy();
+            EnemyToSpawn = Random.Range(0, _Enemies.Count);
+            if (_Counts[EnemyToSpawn] >= _Enemies[EnemyToSpawn].Quantity)
+            {
+                _Enemies.RemoveAt(EnemyToSpawn);
+                _Counts.RemoveAt(EnemyToSpawn);
+                continue;
+            }
+            _Counts[EnemyToSpawn]++;
+            EnemyScript enemy = _EnemyPool.Get();
+            enemy.ondeath.RemoveAllListeners();
+            enemy.ondeath.AddListener(RemoveEnnemy);
+            enemy._Nodes.Clear();
+            foreach (var node in Nodes)
+            {
+                enemy._Nodes.Add(node);
+            }
+            enemy._IsDead = false;
+            enemy._Nodes.Add(_EndPoint);
+            enemy._GameManager = _GameManager;
+            enemy.transform.position = _StartPoint.position;
+            enemy._PV = _Enemies[EnemyToSpawn].Enemy._PV;
+            enemy._Attack = _Enemies[EnemyToSpawn].Enemy._Attack;
+            enemy._Speed = _Enemies[EnemyToSpawn].Enemy._Speed;
+            enemy._Prime = _Enemies[EnemyToSpawn].Enemy._Prime;
+            enemy._AttackSpeed = _Enemies[EnemyToSpawn].Enemy._AttackSpeed;
+            enemy._SpeedMultiplier = 1f;
+            enemy.GetComponentInChildren<SpriteRenderer>().sprite = _Enemies[EnemyToSpawn].Enemy._Sprite;
+            _AliveEnemies.Add(enemy);
+            return enemy;
         }
-        _Counts[EnemyToSpawn]++;
-        EnemyScript enemy = _EnemyPool.Get();
-        enemy.ondeath.RemoveAllListeners();
-        enemy.ondeath.AddListener(RemoveEnnemy);
-        enemy._Nodes.Clear();
-        foreach (var node in Nodes)
-        {
-            enemy._Nodes.Add(node);
-        }
-        enemy._IsDead = false;
-        enemy._Nodes.Add(_EndPoint);
-        enemy._GameManager = _GameManager;
-        enemy.transform.position = _StartPoint.position;
-        enemy._PV = _Enemies[EnemyToSpawn].Enemy._PV;
-        enemy._Attack = _Enemies[EnemyToSpawn].Enemy._Attack;
-        enemy._Speed = _Enemies[EnemyToSpawn].Enemy._Speed;
-        enemy._Prime = _Enemies[EnemyToSpawn].Enemy._Prime;
-        enemy._AttackSpeed = _Enemies[EnemyToSpawn].Enemy._AttackSpeed;
-        enemy._SpeedMultiplier = 1f;
-        _AliveEnemies.Add(enemy);
-        return enemy;
+        return null;
     }
     
     private void RemoveEnnemy(EnemyScript enemy)

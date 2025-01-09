@@ -43,5 +43,6 @@ public class LevelManager : MonoBehaviour
         spawner._Enemies = new List<EnemyWithQuantity>(levels[currentLevel].enemies);
         spawner._spawnRate = levels[currentLevel].spawnrate;
         currentLevel++;
+       // Debug.Log(currentLevel);
     }
 }

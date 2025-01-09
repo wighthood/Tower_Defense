@@ -5,6 +5,7 @@ using UnityEngine.Events;
 
 public class EnemyScript : MonoBehaviour, IPoolableObject<EnemyScript>
 {
+    [SerializeField] private Sprite _DeadSprite;
     public List<Transform> _Nodes = new List<Transform>();
     private Transform _Transform;
     public int _PV;
@@ -68,6 +69,7 @@ public class EnemyScript : MonoBehaviour, IPoolableObject<EnemyScript>
     private void death()
     {
         _IsDead = true;
+        gameObject.GetComponentInChildren<SpriteRenderer>().sprite = _DeadSprite;
         _GameManager._Money += _Prime;
         _GameManager.updateMoneyText();
         ondeath.Invoke(this);

@@ -755,6 +755,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PauseMenu: {fileID: 1193669197}
+  PauseKey:
+    m_Name: Pause Key
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 3944263e-b7ba-461d-8130-e55c98187fff
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: a43352ad-08ff-4420-a2e3-10636b046088
+      m_Path: <Keyboard>/escape
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Pause Key
+      m_Flags: 0
+    m_Flags: 0
 --- !u!1 &378688427
 GameObject:
   m_ObjectHideFlags: 0
@@ -823,7 +840,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 125, y: -37.5}
+  m_AnchoredPosition: {x: 150, y: -37.5}
   m_SizeDelta: {x: 75, y: 75}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &390533170
@@ -10502,6 +10519,8 @@ MonoBehaviour:
   levels:
   - {fileID: 11400000, guid: fd98eac1f85ff4c418bab780ab7eaeef, type: 2}
   - {fileID: 11400000, guid: e02cd72038fc0d04e86d247ec946623e, type: 2}
+  - {fileID: 11400000, guid: 1cf6f2b29830a17459c82a539aa675d1, type: 2}
+  - {fileID: 11400000, guid: be308964b5bb15a418e7e1e2f983c529, type: 2}
   WaveDelay: 5
   _GameOverText: {fileID: 1228357793}
   _GameOverPanel: {fileID: 962691373}
@@ -11375,7 +11394,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 225, y: -37.5}
+  m_AnchoredPosition: {x: 275, y: -37.5}
   m_SizeDelta: {x: 75, y: 75}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &989469375
@@ -12027,7 +12046,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1193669198
 RectTransform:
   m_ObjectHideFlags: 0
@@ -13985,7 +14004,7 @@ Transform:
   m_GameObject: {fileID: 2105466359}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.002, y: 0.004, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
