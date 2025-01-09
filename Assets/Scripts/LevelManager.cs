@@ -1,6 +1,5 @@
-using System;
 using System.Collections.Generic;
-using Unity.VisualScripting;
+using TMPro;
 using UnityEngine;
 
 public class LevelManager : MonoBehaviour
@@ -8,6 +7,9 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private EnemySpawner spawner;
     [SerializeField] private List<Level> levels;
     [SerializeField] private float WaveDelay;
+    [SerializeField] private TextMeshProUGUI _GameOverText;
+    [SerializeField] private GameObject _GameOverPanel;
+
     
     private float Timer;
     private int currentLevel = 0;
@@ -23,7 +25,9 @@ public class LevelManager : MonoBehaviour
         {
             Timer = 0;
             if (currentLevel  <  levels.Count) LoadLevel();
-            Application.Quit();
+            Time.timeScale = 0;
+            _GameOverText.SetText("you won");
+            _GameOverPanel.SetActive(true);
         }
     }
 
