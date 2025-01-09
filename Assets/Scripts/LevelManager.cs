@@ -25,9 +25,12 @@ public class LevelManager : MonoBehaviour
         {
             Timer = 0;
             if (currentLevel  <  levels.Count) LoadLevel();
-            Time.timeScale = 0;
-            _GameOverText.SetText("you won");
-            _GameOverPanel.SetActive(true);
+            else
+            {
+                Time.timeScale = 0;
+                _GameOverText.SetText("you won");
+                _GameOverPanel.SetActive(true);
+            }
         }
     }
 
