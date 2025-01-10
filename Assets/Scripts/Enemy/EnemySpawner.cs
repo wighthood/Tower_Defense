@@ -51,11 +51,11 @@ public class EnemySpawner : MonoBehaviour
             enemy._GameManager = _GameManager;
             enemy.transform.position = _StartPoint.position;
             enemy._PV = _Enemies[EnemyToSpawn].Enemy._PV;
+            enemy.MaxHp = _Enemies[EnemyToSpawn].Enemy._PV;
             enemy._Attack = _Enemies[EnemyToSpawn].Enemy._Attack;
             enemy._Speed = _Enemies[EnemyToSpawn].Enemy._Speed;
             enemy._Prime = _Enemies[EnemyToSpawn].Enemy._Prime;
             enemy._AttackSpeed = _Enemies[EnemyToSpawn].Enemy._AttackSpeed;
-            enemy._SpeedMultiplier = 1f;
             enemy.GetComponentInChildren<SpriteRenderer>().sprite = _Enemies[EnemyToSpawn].Enemy._Sprite;
             _AliveEnemies.Add(enemy);
             return enemy;

@@ -2,13 +2,16 @@ using System.Collections.Generic;
 using PoolSystem;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class EnemyScript : MonoBehaviour, IPoolableObject<EnemyScript>
 {
     [SerializeField] private Sprite _DeadSprite;
+    [SerializeField] private Image _HPBar;
     public List<Transform> _Nodes = new List<Transform>();
     private Transform _Transform;
     public int _PV;
+    public int MaxHp;
     public int _Prime;
     public float _Distance { get;private set; }
     public float _Speed;
@@ -33,6 +36,7 @@ public class EnemyScript : MonoBehaviour, IPoolableObject<EnemyScript>
     private void OnEnable()
     {
         i = 0;
+        _SpeedMultiplier = 1f;
         _Distance = 0;
         _Transform = transform;
     }
@@ -51,6 +55,7 @@ public class EnemyScript : MonoBehaviour, IPoolableObject<EnemyScript>
             {
                 _Nodes[^1].GetComponent<GameManager>()._Lives--;
                 _Nodes[^1].GetComponent<GameManager>().updateLivesText();
+                _Nodes.Clear();
                 Pool.Release(this);
             }
             i++;
@@ -64,13 +69,19 @@ public class EnemyScript : MonoBehaviour, IPoolableObject<EnemyScript>
                 _Undead._PV -= _Attack;
             }
         }
+        else
+        {
+            _SpeedMultiplier = 1f;
+        }
     }
 
     private void death()
     {
+        i = 0;
         _IsDead = true;
         gameObject.GetComponentInChildren<SpriteRenderer>().sprite = _DeadSprite;
         _GameManager._Money += _Prime;
+        _Nodes.Clear();
         _GameManager.updateMoneyText();
         ondeath.Invoke(this);
     }
@@ -83,6 +94,8 @@ public class EnemyScript : MonoBehaviour, IPoolableObject<EnemyScript>
     // Update is called once per frame
     void Update()
     {
+        if (_Undead == null || !_Undead.isActiveAndEnabled)  _SpeedMultiplier = 1f;
+        _HPBar.fillAmount =(float) _PV/MaxHp;
         if (!_IsDead)
         {
             if (_PV <= 0)
@@ -93,8 +106,6 @@ public class EnemyScript : MonoBehaviour, IPoolableObject<EnemyScript>
             {
                 behavior();
             }
-
-      
         }
         else
         {

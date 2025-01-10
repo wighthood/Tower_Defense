@@ -50,10 +50,10 @@ public class tileManager : MonoBehaviour
     public bool CanPlace(Vector3 WorldPosition, GameObject TowerPrefab)
     {
         //return true if you can place a GameObject at the desired location
-     
+        
         Vector3 position = RoundToCell(WorldPosition)+Vector3.one;
         
-        List<Collider2D> colliders = Physics2D.OverlapBoxAll(position,Vector3.one/4,0,3).ToList();
+        List<Collider2D> colliders = Physics2D.OverlapBoxAll(position,Vector3.one/4,0).ToList();
 
         if (TowerPrefab.GetComponent<StructBase>()._IsTrap)
         {

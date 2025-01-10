@@ -16,5 +16,5 @@ MonoBehaviour:
   _Speed: 6
   _Attack: 1
   _AttackSpeed: 1
-  _Prime: 5
+  _Prime: 4
   _Sprite: {fileID: 21300000, guid: f638e55402eed0743bb40f6b0ec90414, type: 3}

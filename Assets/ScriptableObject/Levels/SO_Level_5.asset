@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 24bc78f748eba4b42965ebde2c65f395, type: 3}
-  m_Name: SO_Level_4
+  m_Name: SO_Level_5
   m_EditorClassIdentifier: 
-  level: 4
-  spawnrate: 1
+  level: 5
+  spawnrate: 0.5
   enemies:
   - Enemy: {fileID: 11400000, guid: 061029d18b918db4b9916f1f9bc85e30, type: 2}
     Quantity: 1
