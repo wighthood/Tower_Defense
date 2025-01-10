@@ -16,6 +16,8 @@ MonoBehaviour:
   spawnrate: 0.5
   enemies:
   - Enemy: {fileID: 11400000, guid: 061029d18b918db4b9916f1f9bc85e30, type: 2}
-    Quantity: 1
+    Quantity: 5
   - Enemy: {fileID: 11400000, guid: abd371761c40bd044b3e049933e4dac9, type: 2}
-    Quantity: 20
+    Quantity: 50
+  - Enemy: {fileID: 11400000, guid: 4db1917797a13b343816bc8b003ca072, type: 2}
+    Quantity: 25
