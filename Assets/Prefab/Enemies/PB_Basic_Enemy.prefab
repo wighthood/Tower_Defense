@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1671470932224286368}
   - component: {fileID: 5350997607878122754}
   - component: {fileID: 4481792354873926814}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -201,7 +201,7 @@ GameObject:
   - component: {fileID: 2887261685171710524}
   - component: {fileID: 7878860797519824397}
   - component: {fileID: 1889071860220615977}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: HPBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}

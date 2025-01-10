@@ -146,7 +146,6 @@ public class TowerManager : MonoBehaviour
     private bool CheckUIInTheWay()
     {
         PointerEventData customEventData = new PointerEventData(EventSystem.current);
-
         customEventData.position = _currentMousePosition;
         List<RaycastResult> results = new List<RaycastResult>();
         EventSystem.current.RaycastAll(customEventData, results);

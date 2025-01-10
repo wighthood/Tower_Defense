@@ -10521,6 +10521,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e02cd72038fc0d04e86d247ec946623e, type: 2}
   - {fileID: 11400000, guid: 1cf6f2b29830a17459c82a539aa675d1, type: 2}
   - {fileID: 11400000, guid: be308964b5bb15a418e7e1e2f983c529, type: 2}
+  - {fileID: 11400000, guid: 1a785581b4b0d8e429fcea778df68a74, type: 2}
   WaveDelay: 5
   _GameOverText: {fileID: 1228357793}
   _GameOverPanel: {fileID: 962691373}

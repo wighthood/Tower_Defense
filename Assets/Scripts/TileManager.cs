@@ -51,9 +51,9 @@ public class tileManager : MonoBehaviour
     {
         //return true if you can place a GameObject at the desired location
         
-        Vector3 position = RoundToCell(WorldPosition)+Vector3.one;
+        Vector3 position = RoundToCell(WorldPosition)+Vector3.one/4;
         
-        List<Collider2D> colliders = Physics2D.OverlapBoxAll(position,Vector3.one/4,0).ToList();
+        List<Collider2D> colliders = Physics2D.OverlapBoxAll(position,Vector3.one/2 ,0).ToList();
 
         if (TowerPrefab.GetComponent<StructBase>()._IsTrap)
         {
@@ -71,6 +71,7 @@ public class tileManager : MonoBehaviour
             {
                 if (_defaultTileMap.GetTile(_defaultTileMap.WorldToCell(WorldPosition)) == tile)
                 {
+
                     return false;
                 }
             }
